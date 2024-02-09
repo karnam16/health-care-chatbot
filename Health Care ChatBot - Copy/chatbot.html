@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthcare Chatbot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: darkcyan;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: large;
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      #chat-container {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 50px;
+        background-color: #fff;
+        border-radius: 18px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #chat-box {
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        padding: 10px;
+      }
+
+      #user-input {
+        padding-top: 10px;
+        margin-top: 10px;
+        display: flex;
+      }
+
+      #user-message {
+        flex: 1;
+        padding: 18px;
+      }
+
+      #send-btn {
+        padding: 8px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      #send-btn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Healthcare Chatbot</h1>
+    </header>
+
+    <div id="chat-container">
+      <div id="chat-box"></div>
+      <div id="user-input">
+        <input
+          type="text"
+          id="user-message"
+          placeholder="Type your message..."
+        />
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      function sendMessage() {
+        var userMessage = document.getElementById("user-message").value;
+        if (userMessage.trim() === "") return;
+
+        appendMessage("You", userMessage);
+        document.getElementById("user-message").value = "";
+
+        // Here, you would typically make an API call to your backend
+        // to process the user message and get the chatbot's response.
+
+        // For simplicity, let's assume a simple response for now.
+        var botResponse =
+          "Thank you for your message. I will get back to you shortly.";
+        setTimeout(function () {
+          appendMessage("Healthcare Bot", botResponse);
+        }, 500);
+      }
+
+      function appendMessage(sender, message) {
+        var chatBox = document.getElementById("chat-box");
+        var newMessage = document.createElement("div");
+        newMessage.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatBox.appendChild(newMessage);
+
+        // Scroll to the bottom of the chat box to show the latest message.
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
